@@ -1,4 +1,7 @@
 # search-in-ppdvn
 
 usage
- - <b>gocolly</b>: go get github.com/gocolly/colly
+ - **gocolly**: go get github.com/gocolly/colly
+
+install:
+ - go install github.com/YukiHime23/search-in-ppdvn/cmd/searchppdvn
