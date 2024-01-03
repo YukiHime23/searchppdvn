@@ -3,6 +3,7 @@ package searchinppdvn
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/gocolly/colly"
 )
@@ -36,23 +37,23 @@ func Search(nameQuery string) []Book {
 		e.ForEach("td", func(i int, td *colly.HTMLElement) {
 			switch i {
 			case 0:
-				book.STT = td.Text
+				book.STT = strings.TrimSpace(td.Text)
 			case 1:
-				book.ISBN = td.Text
+				book.ISBN = strings.TrimSpace(td.Text)
 			case 2:
-				book.Title = td.Text
+				book.Title = strings.TrimSpace(td.Text)
 			case 3:
-				book.Author = td.Text
+				book.Author = strings.TrimSpace(td.Text)
 			case 4:
-				book.Editor = td.Text
+				book.Editor = strings.TrimSpace(td.Text)
 			case 5:
-				book.Publisher = td.Text
+				book.Publisher = strings.TrimSpace(td.Text)
 			case 6:
-				book.Affiliate = td.Text
+				book.Affiliate = strings.TrimSpace(td.Text)
 			case 7:
-				book.PrintingPlace = td.Text
+				book.PrintingPlace = strings.TrimSpace(td.Text)
 			case 8:
-				book.SubmissionDate = td.Text
+				book.SubmissionDate = strings.TrimSpace(td.Text)
 			}
 		})
 		books = append(books, book)
