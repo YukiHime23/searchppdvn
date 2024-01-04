@@ -67,7 +67,6 @@ func Search(nameQuery string) []Book {
 	baseURL := "https://ppdvn.gov.vn/web/guest/tra-cuu-luu-chieu?query=%v&id_nxb=-1&p=%d"
 	for p := 1; p <= maxP; p++ {
 		queryURL := fmt.Sprintf(baseURL, nameQuery, p)
-		fmt.Println(queryURL)
 
 		if err := collector.Visit(queryURL); err != nil {
 			log.Fatalln("Visit Error: ", err)
