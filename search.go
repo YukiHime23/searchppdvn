@@ -3,6 +3,7 @@ package searchinppdvn
 import (
 	"fmt"
 	"log"
+	"strconv"
 	"strings"
 
 	"github.com/gocolly/colly"
@@ -21,14 +22,9 @@ type Book struct {
 }
 
 func Search(nameQuery string) []Book {
-	baseURL := "https://ppdvn.gov.vn/web/guest/tra-cuu-luu-chieu?query=%v&id_nxb=-1&p=1"
-
-	queryURL := fmt.Sprintf(baseURL, nameQuery)
-
 	collector := colly.NewCollector(
 		colly.AllowedDomains("ppdvn.gov.vn"),
 	)
-	fmt.Println(queryURL)
 
 	var books []Book
 	collector.OnHTML("div#list_data_return.table tbody tr", func(e *colly.HTMLElement) {
@@ -59,9 +55,39 @@ func Search(nameQuery string) []Book {
 		books = append(books, book)
 	})
 
-	if err := collector.Visit(queryURL); err != nil {
-		log.Fatalln("Visit Error: ", err)
+	maxP := 1
+	collector.OnHTML(".pagination a", func(e *colly.HTMLElement) {
+		href := e.Attr("href")
+		pValue := extractPValue(href)
+		if pValue > maxP {
+			maxP = pValue
+		}
+	})
+
+	baseURL := "https://ppdvn.gov.vn/web/guest/tra-cuu-luu-chieu?query=%v&id_nxb=-1&p=%d"
+	for p := 1; p <= maxP; p++ {
+		queryURL := fmt.Sprintf(baseURL, nameQuery, p)
+		fmt.Println(queryURL)
+
+		if err := collector.Visit(queryURL); err != nil {
+			log.Fatalln("Visit Error: ", err)
+		}
 	}
 
 	return books
+}
+
+func extractPValue(url string) int {
+	pIndex := strings.Index(url, "&p=")
+	if pIndex == -1 {
+		return 0
+	}
+
+	pValueStr := url[pIndex+3:]
+	pValue, err := strconv.Atoi(pValueStr)
+	if err != nil {
+		return 0
+	}
+
+	return pValue
 }
