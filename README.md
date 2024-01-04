@@ -5,3 +5,6 @@ usage
 
 install:
  - go install github.com/YukiHime23/search-in-ppdvn/cmd/searchppdvn
+
+api:
+ - http://localhost:8787/api/search-in-ppdvn?name=
