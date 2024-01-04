@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	searchinppdvn "github.com/YukiHime23/search-in-ppdvn"
+	searchppdvn "github.com/YukiHime23/searchppdvn"
 )
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +18,7 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	nameQuery := strings.Replace(name, " ", "+", -1)
-	resultJson := searchinppdvn.Search(nameQuery)
+	resultJson := searchppdvn.Search(nameQuery)
 	jsonData, err := json.Marshal(resultJson)
 	if err != nil {
 		http.Error(w, "Error converting to JSON", http.StatusInternalServerError)

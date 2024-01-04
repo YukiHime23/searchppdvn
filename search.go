@@ -1,4 +1,4 @@
-package searchinppdvn
+package searchppdvn
 
 import (
 	"fmt"

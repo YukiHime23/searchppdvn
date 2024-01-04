@@ -7,7 +7,7 @@ import (
 	"log"
 	"strings"
 
-	searchinppdvn "github.com/YukiHime23/search-in-ppdvn"
+	searchppdvn "github.com/YukiHime23/searchppdvn"
 )
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
 
 	}
 
-	resultJson := searchinppdvn.Search(nameQuery)
+	resultJson := searchppdvn.Search(nameQuery)
 	jsonData, err := json.Marshal(resultJson)
 	if err != nil {
 		log.Fatalln("Error:", err)
