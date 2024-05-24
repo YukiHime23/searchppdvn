@@ -7,7 +7,7 @@ import (
 	"log"
 	"strings"
 
-	searchppdvn "github.com/YukiHime23/searchppdvn"
+	searchppdvn "github.com/YukiHime23/go-searchppdvn"
 )
 
 func main() {

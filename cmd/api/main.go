@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	searchppdvn "github.com/YukiHime23/searchppdvn"
+	searchppdvn "github.com/YukiHime23/go-searchppdvn"
 )
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {

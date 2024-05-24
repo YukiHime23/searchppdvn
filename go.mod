@@ -1,8 +1,11 @@
-module github.com/YukiHime23/searchppdvn
+module github.com/YukiHime23/go-searchppdvn
 
 go 1.21.5
 
-require github.com/gocolly/colly v1.2.0
+require (
+	github.com/YukiHime23/searchppdvn v0.0.0-20240104080710-186fdc732695
+	github.com/gocolly/colly v1.2.0
+)
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.1 // indirect
